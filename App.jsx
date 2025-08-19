@@ -2,10 +2,9 @@ import React from "react";
 import VideoPlayer from "./VideoPlayer";
 
 const videos = [
-  "/videos/video1.mp4",
-  "/videos/video2.mp4",
-  "/videos/video3.mp4",
-  // 👉 Add more videos in public/videos folder
+  "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+  "https://test-streams.mux.dev/pts_shift/master.m3u8",
+  "https://test-streams.mux.dev/tears_of_steel/tears_of_steel.m3u8",
 ];
 
 export default function App() {
