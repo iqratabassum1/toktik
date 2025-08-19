@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
+      - name: Build 
         run: npm run build
 
       - name: Build And Deploy
@@ -34,3 +34,4 @@ jobs:
           api_location: ""           # No API
           output_location: "build"   # ✅ matches your vite.config.js outDir
           ###### End of Repository/Build Configurations ######
+
