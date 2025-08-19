@@ -36,7 +36,7 @@ jobs:
           ###### Repository/Build Configurations ######
           app_location: "/"         # your package.json is in repo root
           api_location: ""          # no API
-          output_location: "dist"   # vite build output
+          output_location: "build"   # vite build output
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
@@ -50,3 +50,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_SALMON_OCEAN_0DA0E780F }}
           action: "close"
+
