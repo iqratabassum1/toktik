@@ -30,8 +30,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           ###### Repository/Build Configurations ######
-          app_location: "/"          # Root folder where package.json is
-          api_location: ""           # No API
-          output_location: "build"   # ✅ matches your vite.config.js outDir
+          app_location: "/"        # Root folder where package.json is
+          api_location: ""         # No API
+          output_location: "dist"  # ✅ Correct for Vite
           ###### End of Repository/Build Configurations ######
-
