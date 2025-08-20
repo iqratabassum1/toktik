@@ -31,4 +31,6 @@ jobs:
     app_location: "/"          
     api_location: ""           
     output_location: "dist"
+ name: Ensure vite is executable
+  run: chmod +x node_modules/.bin/vite
 
