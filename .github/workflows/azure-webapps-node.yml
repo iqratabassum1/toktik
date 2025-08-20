@@ -30,7 +30,7 @@ jobs:
           action: "upload"
           app_location: "/"
           api_location: ""
-          output_location: "dist"
+          output_location: "build"
 
 
 jobs:
@@ -53,7 +53,7 @@ jobs:
           ###### Repository/Build Configurations ######
           app_location: "/"         # ✅ root since package.json is here
           api_location: ""          # (you don’t have an API)
-          output_location: "dist"   # ✅ Vite outputs to dist
+          output_location: "build"   # ✅ Vite outputs to dist
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
