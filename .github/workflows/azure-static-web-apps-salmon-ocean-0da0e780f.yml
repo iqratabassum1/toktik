@@ -23,6 +23,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Check package.json scripts
+        run: cat package.json | jq '.scripts'
+
       - name: Build
         run: npm run build
 
@@ -33,4 +36,4 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "/"
-          output_location: "build" # 👈 yahan 'build' likhna zaroori hai
+          output_location: "build"
