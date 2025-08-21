@@ -13,8 +13,10 @@ jobs:
   build_and_deploy_job:
     runs-on: ubuntu-latest
     steps:
+    
       - name: Install dependencies
-        run: npm ci
+         run: npm install
+
 
       - name: Ensure vite is executable
         run: chmod +x node_modules/.bin/vite
@@ -31,4 +33,5 @@ jobs:
           action: "upload"
           app_location: "/"          
           api_location: ""
+
 
