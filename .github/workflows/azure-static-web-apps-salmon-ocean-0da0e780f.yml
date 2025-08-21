@@ -15,8 +15,7 @@ jobs:
     steps:
     
       - name: Install dependencies
-         run: npm install
-
+        run: npm install
 
       - name: Ensure vite is executable
         run: chmod +x node_modules/.bin/vite
@@ -33,5 +32,6 @@ jobs:
           action: "upload"
           app_location: "/"          
           api_location: ""
+
 
 
