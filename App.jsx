@@ -26,9 +26,25 @@ export default function App() {
     setComments(newComments);
   };
 
-  const handleShare = (src) => {
-    // Open a new tab with video URL (simulate sharing)
-    window.open(src, "_blank");
+  const handleShare = (src, platform) => {
+    let url = "";
+    const encoded = encodeURIComponent(src);
+
+    switch (platform) {
+      case "whatsapp":
+        url = `https://api.whatsapp.com/send?text=${encoded}`;
+        break;
+      case "facebook":
+        url = `https://www.facebook.com/sharer/sharer.php?u=${encoded}`;
+        break;
+      case "twitter":
+        url = `https://twitter.com/intent/tweet?url=${encoded}`;
+        break;
+      default:
+        url = src;
+    }
+
+    window.open(url, "_blank");
   };
 
   return (
@@ -59,7 +75,7 @@ export default function App() {
           <div
             style={{
               position: "absolute",
-              bottom: "80px",
+              bottom: "100px",
               display: "flex",
               gap: "10px",
             }}
@@ -78,7 +94,7 @@ export default function App() {
               👍 Like {likes[idx]}
             </button>
             <button
-              onClick={() => handleShare(src)}
+              onClick={() => handleShare(src, "whatsapp")}
               style={{
                 padding: "8px 12px",
                 borderRadius: "10px",
@@ -88,7 +104,33 @@ export default function App() {
                 cursor: "pointer",
               }}
             >
-              🔗 Share
+              📱 WhatsApp
+            </button>
+            <button
+              onClick={() => handleShare(src, "facebook")}
+              style={{
+                padding: "8px 12px",
+                borderRadius: "10px",
+                border: "1px solid #1e293b",
+                background: "#0f1b31",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              📘 Facebook
+            </button>
+            <button
+              onClick={() => handleShare(src, "twitter")}
+              style={{
+                padding: "8px 12px",
+                borderRadius: "10px",
+                border: "1px solid #1e293b",
+                background: "#0f1b31",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              🐦 Twitter
             </button>
           </div>
 
