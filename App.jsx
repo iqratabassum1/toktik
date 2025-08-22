@@ -10,23 +10,9 @@ const videos = [
 
 export default function App() {
   return (
-    <div
-      style={{
-        height: "100vh",
-        overflowY: "scroll",
-        scrollSnapType: "y mandatory",
-      }}
-    >
+    <div className="app-container">
       {videos.map((src, idx) => (
-        <div
-          key={idx}
-          style={{
-            height: "100vh",
-            scrollSnapAlign: "start",
-            background: "black",
-            position: "relative",
-          }}
-        >
+        <div key={idx} className="video-frame">
           <VideoPlayer src={src} />
         </div>
       ))}
