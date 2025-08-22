@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Hls from "hls.js";
+import { ThumbsUp, MessageCircle, Share2, Play, Pause } from "lucide-react";
 
 export default function VideoPlayer({ src }) {
   const ref = useRef(null);
   const [playing, setPlaying] = useState(true);
   const [likes, setLikes] = useState(0);
+  const [comments, setComments] = useState(0);
+  const [shares, setShares] = useState(0);
 
   useEffect(() => {
     const v = ref.current;
@@ -23,73 +26,47 @@ export default function VideoPlayer({ src }) {
   }, [src]);
 
   const togglePlay = () => {
-    if (!ref.current) return;
+    const v = ref.current;
+    if (!v) return;
     if (playing) {
-      ref.current.pause();
+      v.pause();
     } else {
-      ref.current.play();
+      v.play();
     }
     setPlaying(!playing);
   };
 
   return (
-    <div style={{ width: "100%", height: "100%", position: "relative" }}>
+    <div className="video-wrapper">
       <video
         ref={ref}
         autoPlay
         loop
         playsInline
-        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        muted
+        className="video-element"
+        onClick={togglePlay}
       />
 
-      {/* Center Play/Pause Overlay */}
-      <div
-        onClick={togglePlay}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          fontSize: "50px",
-          color: "white",
-          opacity: 0.8,
-          cursor: "pointer",
-        }}
-      >
-        {playing ? "" : "▶️"}
+      {/* Overlay Controls */}
+      <div className="overlay-controls">
+        <button onClick={() => setLikes(likes + 1)}>
+          <ThumbsUp size={28} />
+          <span>{likes}</span>
+        </button>
+        <button onClick={() => setComments(comments + 1)}>
+          <MessageCircle size={28} />
+          <span>{comments}</span>
+        </button>
+        <button onClick={() => setShares(shares + 1)}>
+          <Share2 size={28} />
+          <span>{shares}</span>
+        </button>
       </div>
 
-      {/* Right Side Buttons */}
-      <div
-        style={{
-          position: "absolute",
-          right: "10px",
-          bottom: "20%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "20px",
-          color: "white",
-          fontSize: "20px",
-        }}
-      >
-        {/* Like Button */}
-        <div onClick={() => setLikes(likes + 1)} style={{ cursor: "pointer" }}>
-          ❤️
-          <div style={{ fontSize: "14px" }}>{likes}</div>
-        </div>
-
-        {/* Comment Button */}
-        <div onClick={() => alert("Comment feature coming soon!")} style={{ cursor: "pointer" }}>
-          💬
-          <div style={{ fontSize: "14px" }}>Comment</div>
-        </div>
-
-        {/* Share Button */}
-        <div onClick={() => alert("Share feature coming soon!")} style={{ cursor: "pointer" }}>
-          ↗️
-          <div style={{ fontSize: "14px" }}>Share</div>
-        </div>
+      {/* Play/Pause Center Icon */}
+      <div className="center-control" onClick={togglePlay}>
+        {playing ? <Pause size={60} /> : <Play size={60} />}
       </div>
     </div>
   );
