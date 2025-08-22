@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import VideoPlayer from "./VideoPlayer";
 
 const videos = [
@@ -13,7 +13,6 @@ const videos = [
 export default function App() {
   const [likes, setLikes] = useState(Array(videos.length).fill(0));
   const [comments, setComments] = useState(Array(videos.length).fill(""));
-  const videoRefs = useRef([]);
 
   const handleLike = (index) => {
     const newLikes = [...likes];
@@ -27,51 +26,26 @@ export default function App() {
     setComments(newComments);
   };
 
-  const handleShare = (platform) => {
-    const demoURL = encodeURIComponent("https://example.com/demo-video");
+  const handleShare = (src, platform) => {
     let url = "";
+    const encoded = encodeURIComponent(src);
+
     switch (platform) {
       case "whatsapp":
-        url = `https://api.whatsapp.com/send?text=${demoURL}`;
+        url = `https://api.whatsapp.com/send?text=${encoded}`;
         break;
       case "facebook":
-        url = `https://www.facebook.com/sharer/sharer.php?u=${demoURL}`;
+        url = `https://www.facebook.com/sharer/sharer.php?u=${encoded}`;
         break;
       case "twitter":
-        url = `https://twitter.com/intent/tweet?url=${demoURL}`;
+        url = `https://twitter.com/intent/tweet?url=${encoded}`;
         break;
       default:
-        url = demoURL;
+        url = src;
     }
+
     window.open(url, "_blank");
   };
-
-  // IntersectionObserver: visible video autoplay
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target;
-          if (entry.isIntersecting) {
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.6 } // changed to 0.6 for better multi-video detection
-    );
-
-    videoRefs.current.forEach((v) => {
-      if (v) observer.observe(v);
-    });
-
-    return () => {
-      videoRefs.current.forEach((v) => {
-        if (v) observer.unobserve(v);
-      });
-    };
-  }, []);
 
   return (
     <div
@@ -87,128 +61,88 @@ export default function App() {
           style={{
             height: "100vh",
             scrollSnapAlign: "start",
-            position: "relative",
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
             background: "black",
+            position: "relative",
           }}
         >
-          <VideoPlayer ref={(el) => (videoRefs.current[idx] = el)} src={src} />
+          <VideoPlayer src={src} autoPlay={idx === 0} />
 
-          {/* Vertical Buttons */}
+          {/* Like & Share buttons */}
           <div
             style={{
               position: "absolute",
-              right: "20px",
               bottom: "100px",
               display: "flex",
-              flexDirection: "column",
-              gap: "16px",
-              alignItems: "center",
+              gap: "10px",
             }}
           >
-            {/* Like */}
             <button
               onClick={() => handleLike(idx)}
               style={{
-                width: 60,
-                height: 60,
-                borderRadius: "50%",
-                border: "none",
+                padding: "8px 12px",
+                borderRadius: "10px",
+                border: "1px solid #1e293b",
                 background: "#0f1b31",
                 color: "#fff",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
                 cursor: "pointer",
-                fontWeight: "600",
               }}
             >
-              ❤️ {likes[idx]}
+              👍 Like {likes[idx]}
             </button>
-
-            {/* Comment */}
             <button
-              onClick={() => alert(`Commented: ${comments[idx]}`)}
+              onClick={() => handleShare(src, "whatsapp")}
               style={{
-                width: 60,
-                height: 60,
-                borderRadius: "50%",
-                border: "none",
+                padding: "8px 12px",
+                borderRadius: "10px",
+                border: "1px solid #1e293b",
                 background: "#0f1b31",
                 color: "#fff",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
                 cursor: "pointer",
               }}
             >
-              💬
+              📱 WhatsApp
             </button>
-
-            {/* Share Buttons */}
             <button
-              onClick={() => handleShare("whatsapp")}
+              onClick={() => handleShare(src, "facebook")}
               style={{
-                width: 60,
-                height: 60,
-                borderRadius: "50%",
-                border: "none",
-                background: "#25D366",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                padding: "8px 12px",
+                borderRadius: "10px",
+                border: "1px solid #1e293b",
+                background: "#0f1b31",
+                color: "#fff",
                 cursor: "pointer",
               }}
             >
-              📱
+              📘 Facebook
             </button>
-
             <button
-              onClick={() => handleShare("facebook")}
+              onClick={() => handleShare(src, "twitter")}
               style={{
-                width: 60,
-                height: 60,
-                borderRadius: "50%",
-                border: "none",
-                background: "#4267B2",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                padding: "8px 12px",
+                borderRadius: "10px",
+                border: "1px solid #1e293b",
+                background: "#0f1b31",
+                color: "#fff",
                 cursor: "pointer",
               }}
             >
-              f
-            </button>
-
-            <button
-              onClick={() => handleShare("twitter")}
-              style={{
-                width: 60,
-                height: 60,
-                borderRadius: "50%",
-                border: "none",
-                background: "#1DA1F2",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-            >
-              🐦
+              🐦 Twitter
             </button>
           </div>
 
-          {/* Comment Input */}
+          {/* Comment box */}
           <div
             style={{
               position: "absolute",
               bottom: "20px",
-              width: "80%",
-              maxWidth: "400px",
               display: "flex",
               gap: "8px",
+              width: "80%",
+              maxWidth: "500px",
             }}
           >
             <input
@@ -228,7 +162,7 @@ export default function App() {
             <button
               onClick={() => alert(`Commented: ${comments[idx]}`)}
               style={{
-                padding: "10px 12px",
+                padding: "10px 14px",
                 borderRadius: "10px",
                 border: "0",
                 background: "#60a5fa",
