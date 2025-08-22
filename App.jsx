@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import VideoPlayer from "./VideoPlayer";
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
+import { FacebookIcon, TwitterIcon, WhatsappIcon } from "react-share";
 
 const videos = [
   "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
@@ -28,7 +30,6 @@ export default function App() {
   };
 
   const handleShare = (platform) => {
-    // Placeholder public link (social media prefer public URLs)
     const demoURL = encodeURIComponent("https://example.com/demo-video");
     let url = "";
     switch (platform) {
@@ -47,6 +48,7 @@ export default function App() {
     window.open(url, "_blank");
   };
 
+  // IntersectionObserver to play only visible video
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -59,7 +61,7 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.75 }
+      { threshold: 0.75 } // 75% visible
     );
 
     videoRefs.current.forEach((v) => {
@@ -119,7 +121,7 @@ export default function App() {
                 cursor: "pointer",
               }}
             >
-              👍 {likes[idx]}
+              Like {likes[idx]}
             </button>
 
             <button
@@ -133,50 +135,53 @@ export default function App() {
                 cursor: "pointer",
               }}
             >
-              💬
+              Comment
             </button>
 
-            <button
-              onClick={() => handleShare("whatsapp")}
+            <FacebookShareButton
+              url={`https://example.com/video/${idx}`}
+              quote={`Check out this video: ${videos[idx]}`}
               style={{
+                backgroundColor: "#4267B2",
+                color: "#fff",
                 padding: "12px",
                 borderRadius: "50%",
                 border: "none",
-                background: "#25D366",
-                color: "#fff",
                 cursor: "pointer",
               }}
             >
-              📱
-            </button>
+              <FacebookIcon size={32} round />
+            </FacebookShareButton>
 
-            <button
-              onClick={() => handleShare("facebook")}
+            <TwitterShareButton
+              url={`https://example.com/video/${idx}`}
+              title={`Check out this video: ${videos[idx]}`}
               style={{
+                backgroundColor: "#1DA1F2",
+                color: "#fff",
                 padding: "12px",
                 borderRadius: "50%",
                 border: "none",
-                background: "#4267B2",
-                color: "#fff",
                 cursor: "pointer",
               }}
             >
-              📘
-            </button>
+              <TwitterIcon size={32} round />
+            </TwitterShareButton>
 
-            <button
-              onClick={() => handleShare("twitter")}
+            <WhatsappShareButton
+              url={`https://example.com/video/${idx}`}
+              title={`Check out this video: ${videos[idx]}`}
               style={{
+                backgroundColor: "#25D366",
+                color: "#fff",
                 padding: "12px",
                 borderRadius: "50%",
                 border: "none",
-                background: "#1DA1F2",
-                color: "#fff",
                 cursor: "pointer",
               }}
             >
-              🐦
-            </button>
+              <WhatsappIcon size={32} round />
+            </WhatsappShareButton>
           </div>
 
           {/* Comment input at bottom */}
