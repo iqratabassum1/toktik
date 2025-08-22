@@ -25,7 +25,9 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npx vite build   # yahan direct npx use karo
+        run: |
+          chmod +x ./node_modules/.bin/vite
+          ./node_modules/.bin/vite build
 
       - name: Deploy to Azure
         uses: Azure/static-web-apps-deploy@v1
