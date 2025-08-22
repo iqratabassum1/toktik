@@ -46,7 +46,7 @@ export default function App() {
     window.open(url, "_blank");
   };
 
-  // IntersectionObserver to autoplay visible video
+  // IntersectionObserver to autoplay only visible video
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -96,7 +96,7 @@ export default function App() {
         >
           <VideoPlayer ref={(el) => (videoRefs.current[idx] = el)} src={src} />
 
-          {/* Vertical buttons */}
+          {/* Vertical Buttons */}
           <div
             style={{
               position: "absolute",
@@ -158,7 +158,7 @@ export default function App() {
             </button>
           </div>
 
-          {/* Comment input */}
+          {/* Comment Box */}
           <div
             style={{
               position: "absolute",
