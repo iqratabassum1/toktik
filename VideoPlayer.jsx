@@ -9,7 +9,6 @@ const VideoPlayer = forwardRef(({ src }, ref) => {
     const v = videoRef.current;
     if (!v) return;
 
-    // HLS setup
     if (Hls.isSupported()) {
       const hls = new Hls();
       hls.loadSource(src);
