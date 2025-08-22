@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import VideoPlayer from "./VideoPlayer";
-import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
-import { FacebookIcon, TwitterIcon, WhatsappIcon } from "react-share";
 
 const videos = [
   "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
@@ -48,7 +46,7 @@ export default function App() {
     window.open(url, "_blank");
   };
 
-  // IntersectionObserver to play only visible video
+  // IntersectionObserver for autoplay visible video
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -61,7 +59,7 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.75 } // 75% visible
+      { threshold: 0.75 } // play when 75% visible
     );
 
     videoRefs.current.forEach((v) => {
@@ -98,7 +96,7 @@ export default function App() {
         >
           <VideoPlayer ref={(el) => (videoRefs.current[idx] = el)} src={src} />
 
-          {/* Vertical fixed buttons */}
+          {/* Vertical buttons */}
           <div
             style={{
               position: "absolute",
@@ -110,6 +108,7 @@ export default function App() {
               alignItems: "center",
             }}
           >
+            {/* Like */}
             <button
               onClick={() => handleLike(idx)}
               style={{
@@ -124,6 +123,7 @@ export default function App() {
               Like {likes[idx]}
             </button>
 
+            {/* Comment */}
             <button
               onClick={() => alert(`Commented: ${comments[idx]}`)}
               style={{
@@ -138,94 +138,6 @@ export default function App() {
               Comment
             </button>
 
-            <FacebookShareButton
-              url={`https://example.com/video/${idx}`}
-              quote={`Check out this video: ${videos[idx]}`}
-              style={{
-                backgroundColor: "#4267B2",
-                color: "#fff",
-                padding: "12px",
-                borderRadius: "50%",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              <FacebookIcon size={32} round />
-            </FacebookShareButton>
-
-            <TwitterShareButton
-              url={`https://example.com/video/${idx}`}
-              title={`Check out this video: ${videos[idx]}`}
-              style={{
-                backgroundColor: "#1DA1F2",
-                color: "#fff",
-                padding: "12px",
-                borderRadius: "50%",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              <TwitterIcon size={32} round />
-            </TwitterShareButton>
-
-            <WhatsappShareButton
-              url={`https://example.com/video/${idx}`}
-              title={`Check out this video: ${videos[idx]}`}
-              style={{
-                backgroundColor: "#25D366",
-                color: "#fff",
-                padding: "12px",
-                borderRadius: "50%",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              <WhatsappIcon size={32} round />
-            </WhatsappShareButton>
-          </div>
-
-          {/* Comment input at bottom */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: "20px",
-              width: "80%",
-              maxWidth: "400px",
-              display: "flex",
-              gap: "8px",
-            }}
-          >
-            <input
-              type="text"
-              placeholder="Add a comment..."
-              value={comments[idx]}
-              onChange={(e) => handleCommentChange(idx, e.target.value)}
-              style={{
-                flex: 1,
-                padding: "10px 12px",
-                borderRadius: "10px",
-                border: "1px solid #1e293b",
-                background: "#0f1b31",
-                color: "#fff",
-              }}
-            />
+            {/* Share Buttons with placeholders for images/icons */}
             <button
-              onClick={() => alert(`Commented: ${comments[idx]}`)}
-              style={{
-                padding: "10px 12px",
-                borderRadius: "10px",
-                border: "0",
-                background: "#60a5fa",
-                color: "#071427",
-                cursor: "pointer",
-                fontWeight: "600",
-              }}
-            >
-              Post
-            </button>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
+              onClick={()
