@@ -46,7 +46,7 @@ export default function App() {
     window.open(url, "_blank");
   };
 
-  // IntersectionObserver: Only visible video autoplay
+  // IntersectionObserver: visible video autoplay
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -59,7 +59,7 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.75 }
+      { threshold: 0.6 } // changed to 0.6 for better multi-video detection
     );
 
     videoRefs.current.forEach((v) => {
@@ -119,8 +119,8 @@ export default function App() {
                 background: "#0f1b31",
                 color: "#fff",
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
+                alignItems: "center",
                 cursor: "pointer",
                 fontWeight: "600",
               }}
@@ -139,8 +139,8 @@ export default function App() {
                 background: "#0f1b31",
                 color: "#fff",
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
+                alignItems: "center",
                 cursor: "pointer",
               }}
             >
@@ -157,8 +157,8 @@ export default function App() {
                 border: "none",
                 background: "#25D366",
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
+                alignItems: "center",
                 cursor: "pointer",
               }}
             >
@@ -174,8 +174,8 @@ export default function App() {
                 border: "none",
                 background: "#4267B2",
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
+                alignItems: "center",
                 cursor: "pointer",
               }}
             >
@@ -191,8 +191,8 @@ export default function App() {
                 border: "none",
                 background: "#1DA1F2",
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
+                alignItems: "center",
                 cursor: "pointer",
               }}
             >
