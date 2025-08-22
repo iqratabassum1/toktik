@@ -46,7 +46,7 @@ export default function App() {
     window.open(url, "_blank");
   };
 
-  // IntersectionObserver for autoplay visible video
+  // IntersectionObserver to autoplay visible video
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -59,7 +59,7 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.75 } // play when 75% visible
+      { threshold: 0.75 }
     );
 
     videoRefs.current.forEach((v) => {
@@ -108,7 +108,6 @@ export default function App() {
               alignItems: "center",
             }}
           >
-            {/* Like */}
             <button
               onClick={() => handleLike(idx)}
               style={{
@@ -123,7 +122,6 @@ export default function App() {
               Like {likes[idx]}
             </button>
 
-            {/* Comment */}
             <button
               onClick={() => alert(`Commented: ${comments[idx]}`)}
               style={{
@@ -138,45 +136,23 @@ export default function App() {
               Comment
             </button>
 
-            {/* Share Buttons with placeholders for images/icons */}
             <button
               onClick={() => handleShare("whatsapp")}
-              style={{
-                padding: "12px",
-                borderRadius: "50%",
-                border: "none",
-                background: "#25D366",
-                color: "#fff",
-                cursor: "pointer",
-              }}
+              style={{ padding: "12px", borderRadius: "50%", border: "none", cursor: "pointer" }}
             >
               <img src="/icons/whatsapp.png" alt="WhatsApp" style={{ width: 32, height: 32 }} />
             </button>
 
             <button
               onClick={() => handleShare("facebook")}
-              style={{
-                padding: "12px",
-                borderRadius: "50%",
-                border: "none",
-                background: "#4267B2",
-                color: "#fff",
-                cursor: "pointer",
-              }}
+              style={{ padding: "12px", borderRadius: "50%", border: "none", cursor: "pointer" }}
             >
               <img src="/icons/facebook.png" alt="Facebook" style={{ width: 32, height: 32 }} />
             </button>
 
             <button
               onClick={() => handleShare("twitter")}
-              style={{
-                padding: "12px",
-                borderRadius: "50%",
-                border: "none",
-                background: "#1DA1F2",
-                color: "#fff",
-                cursor: "pointer",
-              }}
+              style={{ padding: "12px", borderRadius: "50%", border: "none", cursor: "pointer" }}
             >
               <img src="/icons/twitter.png" alt="Twitter" style={{ width: 32, height: 32 }} />
             </button>
