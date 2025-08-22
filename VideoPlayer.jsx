@@ -30,7 +30,6 @@ export default function VideoPlayer({ src }) {
       style={{
         width: "100%",
         height: "100%",
-        borderRadius: "16px",
         objectFit: "cover",
       }}
     />
