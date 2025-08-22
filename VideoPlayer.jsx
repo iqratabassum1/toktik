@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, forwardRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Hls from "hls.js";
 
-const VideoPlayer = forwardRef(({ src }, ref) => {
-  const internalRef = useRef(null);
-  const videoRef = ref || internalRef;
+export default function VideoPlayer({ src, autoPlay }) {
+  const ref = useRef(null);
 
   useEffect(() => {
-    const v = videoRef.current;
+    const v = ref.current;
     if (!v) return;
 
     if (Hls.isSupported()) {
@@ -23,13 +22,12 @@ const VideoPlayer = forwardRef(({ src }, ref) => {
 
   return (
     <video
-      ref={videoRef}
-      muted
+      ref={ref}
       controls
       playsInline
+      autoPlay={autoPlay}
+      muted={autoPlay} // auto-play ke liye muted zaruri
       style={{ width: "100%", height: "100vh", objectFit: "cover" }}
     />
   );
-});
-
-export default VideoPlayer;
+}
