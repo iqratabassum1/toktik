@@ -140,4 +140,90 @@ export default function App() {
 
             {/* Share Buttons with placeholders for images/icons */}
             <button
-              onClick={()
+              onClick={() => handleShare("whatsapp")}
+              style={{
+                padding: "12px",
+                borderRadius: "50%",
+                border: "none",
+                background: "#25D366",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              <img src="/icons/whatsapp.png" alt="WhatsApp" style={{ width: 32, height: 32 }} />
+            </button>
+
+            <button
+              onClick={() => handleShare("facebook")}
+              style={{
+                padding: "12px",
+                borderRadius: "50%",
+                border: "none",
+                background: "#4267B2",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              <img src="/icons/facebook.png" alt="Facebook" style={{ width: 32, height: 32 }} />
+            </button>
+
+            <button
+              onClick={() => handleShare("twitter")}
+              style={{
+                padding: "12px",
+                borderRadius: "50%",
+                border: "none",
+                background: "#1DA1F2",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              <img src="/icons/twitter.png" alt="Twitter" style={{ width: 32, height: 32 }} />
+            </button>
+          </div>
+
+          {/* Comment input */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: "20px",
+              width: "80%",
+              maxWidth: "400px",
+              display: "flex",
+              gap: "8px",
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Add a comment..."
+              value={comments[idx]}
+              onChange={(e) => handleCommentChange(idx, e.target.value)}
+              style={{
+                flex: 1,
+                padding: "10px 12px",
+                borderRadius: "10px",
+                border: "1px solid #1e293b",
+                background: "#0f1b31",
+                color: "#fff",
+              }}
+            />
+            <button
+              onClick={() => alert(`Commented: ${comments[idx]}`)}
+              style={{
+                padding: "10px 12px",
+                borderRadius: "10px",
+                border: "0",
+                background: "#60a5fa",
+                color: "#071427",
+                cursor: "pointer",
+                fontWeight: "600",
+              }}
+            >
+              Post
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
