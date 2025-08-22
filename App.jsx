@@ -1,23 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import VideoPlayer from "./VideoPlayer";
-import "./styles.css";
 
 const videos = [
-  {
-    url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-    title: "Nature Vibes 🌿",
-  },
-  {
-    url: "https://test-streams.mux.dev/pts_shift/master.m3u8",
-    title: "Tech Talk 💻",
-  },
-  {
-    url: "https://test-streams.mux.dev/tears_of_steel/tears_of_steel.m3u8",
-    title: "Short Film 🎬",
-  },
+  "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+  "https://test-streams.mux.dev/pts_shift/master.m3u8",
+  "https://test-streams.mux.dev/tears_of_steel/tears_of_steel.m3u8",
 ];
 
 export default function App() {
+  const [likes, setLikes] = useState(Array(videos.length).fill(0));
+
+  const handleLike = (index) => {
+    const newLikes = [...likes];
+    newLikes[index] += 1;
+    setLikes(newLikes);
+  };
+
   return (
     <div
       style={{
@@ -26,28 +24,55 @@ export default function App() {
         scrollSnapType: "y mandatory",
       }}
     >
-      {videos.map((video, idx) => (
+      {videos.map((src, idx) => (
         <div
           key={idx}
           style={{
             height: "100vh",
             scrollSnapAlign: "start",
-            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
             background: "black",
+            position: "relative",
           }}
         >
-          <VideoPlayer src={video.url} />
-          {/* Overlay content */}
-          <div className="overlay">
-            <div className="video-info">
-              <h3>{video.title}</h3>
-              <p>@username</p>
-            </div>
-            <div className="actions">
-              <button>❤️ Like</button>
-              <button>💬 Comment</button>
-              <button>🔗 Share</button>
-            </div>
+          <VideoPlayer src={src} autoPlay={idx === 0} />
+          <div
+            style={{
+              position: "absolute",
+              bottom: "20px",
+              display: "flex",
+              gap: "10px",
+            }}
+          >
+            <button
+              onClick={() => handleLike(idx)}
+              style={{
+                padding: "8px 12px",
+                borderRadius: "10px",
+                border: "1px solid #1e293b",
+                background: "#0f1b31",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              👍 Like {likes[idx]}
+            </button>
+            <button
+              onClick={() => alert("Shared!")}
+              style={{
+                padding: "8px 12px",
+                borderRadius: "10px",
+                border: "1px solid #1e293b",
+                background: "#0f1b31",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              🔗 Share
+            </button>
           </div>
         </div>
       ))}
