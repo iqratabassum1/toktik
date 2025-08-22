@@ -64,3 +64,43 @@
   opacity: 0.7;
   cursor: pointer;
 }
+.overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: white;
+}
+
+.video-info {
+  max-width: 70%;
+}
+
+.video-info h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.video-info p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.actions button {
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
