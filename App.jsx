@@ -1,5 +1,6 @@
 import React from "react";
 import VideoPlayer from "./VideoPlayer";
+import "./styles.css";
 
 const videos = [
   "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
@@ -9,26 +10,10 @@ const videos = [
 
 export default function App() {
   return (
-    <div
-      style={{
-        height: "100vh",
-        overflowY: "scroll",
-        scrollSnapType: "y mandatory",
-      }}
-    >
+    <div className="app-feed">
       {videos.map((src, idx) => (
-        <div
-          key={idx}
-          style={{
-            height: "100vh",
-            scrollSnapAlign: "start",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            background: "black",
-          }}
-        >
-          <VideoPlayer src={src} />
+        <div key={idx} className="video-page">
+          <VideoPlayer src={src} caption={`Video ${idx + 1}`} username="@user" />
         </div>
       ))}
     </div>
