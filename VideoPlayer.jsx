@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Hls from "hls.js";
 
-export default function VideoPlayer({ src }) {
+export default function VideoPlayer({ src, autoPlay }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -23,11 +23,11 @@ export default function VideoPlayer({ src }) {
   return (
     <video
       ref={ref}
-      autoPlay
-      loop
+      controls
       playsInline
-      muted
-      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+      autoPlay={autoPlay}
+      muted={autoPlay} // auto-play ke liye muted zaruri
+      style={{ width: "100%", height: "100vh", objectFit: "cover" }}
     />
   );
 }
