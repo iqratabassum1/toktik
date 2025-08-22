@@ -46,7 +46,7 @@ export default function App() {
     window.open(url, "_blank");
   };
 
-  // IntersectionObserver to autoplay only visible video
+  // IntersectionObserver: Only visible video autoplay
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -108,57 +108,99 @@ export default function App() {
               alignItems: "center",
             }}
           >
+            {/* Like */}
             <button
               onClick={() => handleLike(idx)}
               style={{
-                padding: "12px",
+                width: 60,
+                height: 60,
                 borderRadius: "50%",
                 border: "none",
                 background: "#0f1b31",
                 color: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 cursor: "pointer",
+                fontWeight: "600",
               }}
             >
-              Like {likes[idx]}
+              ❤️ {likes[idx]}
             </button>
 
+            {/* Comment */}
             <button
               onClick={() => alert(`Commented: ${comments[idx]}`)}
               style={{
-                padding: "12px",
+                width: 60,
+                height: 60,
                 borderRadius: "50%",
                 border: "none",
                 background: "#0f1b31",
                 color: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 cursor: "pointer",
               }}
             >
-              Comment
+              💬
             </button>
 
+            {/* Share Buttons */}
             <button
               onClick={() => handleShare("whatsapp")}
-              style={{ padding: "12px", borderRadius: "50%", border: "none", cursor: "pointer" }}
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: "50%",
+                border: "none",
+                background: "#25D366",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+              }}
             >
-              <img src="/icons/whatsapp.png" alt="WhatsApp" style={{ width: 32, height: 32 }} />
+              📱
             </button>
 
             <button
               onClick={() => handleShare("facebook")}
-              style={{ padding: "12px", borderRadius: "50%", border: "none", cursor: "pointer" }}
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: "50%",
+                border: "none",
+                background: "#4267B2",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+              }}
             >
-              <img src="/icons/facebook.png" alt="Facebook" style={{ width: 32, height: 32 }} />
+              f
             </button>
 
             <button
               onClick={() => handleShare("twitter")}
-              style={{ padding: "12px", borderRadius: "50%", border: "none", cursor: "pointer" }}
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: "50%",
+                border: "none",
+                background: "#1DA1F2",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+              }}
             >
-              <img src="/icons/twitter.png" alt="Twitter" style={{ width: 32, height: 32 }} />
+              🐦
             </button>
           </div>
 
-          {/* Comment Box */}
+          {/* Comment Input */}
           <div
             style={{
               position: "absolute",
